@@ -1,0 +1,61 @@
+host : 127.0.0.1
+port : 3000
+url : 127.0.0.1:3000
+1.登陆
+login
+ url:127.0.0.1:3000/login
+ data:{
+ 	username:"",
+ 	password:""
+ }
+ callback:
+     data:
+ 	     code: 0成功 1失败 2未注册
+ 	     msg:""
+ 	     user_id:number
+ 		
+2.注册
+register
+ url:127.0.0.1:3000/register
+ data:{
+ 	username:"",
+ 	password:"",
+ 	tel:""
+ }
+ callback:
+     data:
+         code: 0成功 1用户名已存在
+         msg:""
+         
+3.获取用户详情
+get_user_detail
+  url:127.0.0.1:3000/get_user_detail
+  data:{
+      user_id:""
+  }
+  callback:
+      data:
+          code: 0成功 1失败
+          msg:""
+      	  data:{
+      	      user_icon:"",
+      	      username:"",
+      	      tel:"",
+      	  }
+
+4.更改用户信息
+updata_user_detail
+  url:127.0.0.1:3000/updata_user_detail
+  data:{
+      user_icon:"",
+      username:"",
+      tel:""
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:""
+          data:{
+              
+          }
+5.
