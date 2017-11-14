@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //route
 var login = require('./routes/login');
+var article = require('./routes/article');
 var app = express();
 //跨域
 app.all('*', function(req, res, next) {
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/login', login);
+app.use('/article', article);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

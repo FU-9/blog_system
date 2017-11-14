@@ -21,7 +21,15 @@ router.post('/register', (req, res, next)=>{
 						if(err){
 							console.log('出错了')
 						}else{
-			  				res.send({'code':'0','data':{},'msg':"成功"});
+							console.log(data)
+							linkDB.query("INSERT INTO `article_table` (`user_id`,`article`) VALUES("+ data.insertId +",'[]');",(err,data)=>{
+								if(err){
+									console.log("出错了")
+								}else{
+									res.send({'code':'0','data':{},'msg':"成功"});
+								}
+							})
+			  				
 						}
 					})
 				}else{

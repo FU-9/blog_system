@@ -1,7 +1,8 @@
 host : 127.0.0.1
 port : 3000
 url : 127.0.0.1:3000
-1.登陆
+（1）
+1.登陆V
 login
  url:127.0.0.1:3000/login/login
  data:{
@@ -14,7 +15,7 @@ login
  	     msg:""
  	     user_id:number
  		
-2.注册
+2.注册V
 register
  url:127.0.0.1:3000/login/register
  data:{
@@ -47,6 +48,7 @@ get_user_detail
 updata_user_detail
   url:127.0.0.1:3000/updata_user_detail
   data:{
+  	  user_id:"",
       user_icon:"",
       username:"",
       tel:""
@@ -58,4 +60,126 @@ updata_user_detail
           data:{
               
           }
-5.
+-----------------------------------------------------------------------------------------------------------------------
+（2）
+1.获取banner
+get_banner_list
+  url:127.0.0.1:3000/get_banner_list
+  data:{
+  	user_id:"",
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:
+          data:[
+          	{
+          		url:""
+          	}
+          ]
+ 2.获取推荐文章列表
+ get_recommend_article
+   url:127.0.0.1:3000/get_recommend_article
+   data:{
+
+   }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:
+          data:[
+          	{
+          		time:"",
+          		id:"",
+          		article_class_id:"",
+          		title:"",
+          		author:"",
+          		content:"",
+          		look:"",
+          		fabulous:""
+          	}
+          ]
+ 3.获取文章详情
+ get_article_detail
+  url:127.0.0.1:3000/get_article_detail
+  data:{
+      id:"",
+      article_class_id:""
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:
+          data:{
+          		time:"",
+          		id:"",
+          		article_class_id:"",
+          		title:"",
+          		author:"",
+          		content:"",
+          		look:"",
+          		fabulous:""
+          	}
+4.获取文章分类V
+get_artile_class
+  url:127.0.0.1:3000/get_artile_class
+  data:{
+      user_id:""
+  }
+  callback:
+    data:
+        code:0成功 1失败
+        msg:"",
+        data:[
+            {
+            	    icon_url:"",
+            	    article_class_name:"",
+            	    article_class_id:""
+            }
+        ]
+5.获取单条分类所有文章列表
+get_artile_class_detail
+  url:127.0.0.1:3000/get_artile_class_detail
+  data:{
+    user_id:""
+  	article_class_id:"",
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:"",
+          data:[
+          	{
+          		time:"",
+          		id:"",
+          		article_class_id:"",
+          		title:"",
+          		author:"",
+          		content:"",
+          		look:"",
+          		fabulous:""
+          	}
+          ]
+6.新增文章分类V
+add_article_class
+  url:127.0.0.1:3000/add_artile_class
+  data:{
+        user_id:"",
+  		article_class_name:"",
+  		icon_url:""
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:"",
+          data:{
+          
+          }
+7.新增文章
+add_article
+  url:127.0.0.1:3000/add_article
+  data:{
+    user_id:"",
+  	article_class_id:"",
+  	content:""
+  }
