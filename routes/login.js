@@ -14,17 +14,16 @@ router.post('/register', (req, res, next)=>{
 	}else{
 		linkDB.query("SELECT * FROM `user_table` WHERE username='"+ ReceivedData.username +"' ;",(err,data)=>{
 			if(err){
-				console.log('出错了')
+				res.send({'code':1,data:{},msg:"数据库链接失败"});
 			}else{
 				if(data.length===0){
 					linkDB.query("INSERT INTO `user_table` (`ID`,`username`,`password`) VALUES(0,'"+ ReceivedData.username +"','"+ ReceivedData.password +"');",(err,data)=>{
 						if(err){
-							console.log('出错了')
+							res.send({'code':1,data:{},msg:"数据库链接失败"});
 						}else{
-							console.log(data)
 							linkDB.query("INSERT INTO `article_table` (`user_id`,`article`) VALUES("+ data.insertId +",'[]');",(err,data)=>{
 								if(err){
-									console.log("出错了")
+									res.send({'code':1,data:{},msg:"数据库链接失败"});
 								}else{
 									res.send({'code':'0','data':{},'msg':"成功"});
 								}
@@ -43,10 +42,9 @@ router.post('/register', (req, res, next)=>{
 router.use('/login',bodyParser.urlencoded({}))
 router.post('/login',(req,res)=>{
 	let ReceivedData = req.body;
-	console.log(ReceivedData)
 	linkDB.query("SELECT * FROM `user_table` WHERE username='"+ ReceivedData.username +"' ;",(err,data)=>{
 		if(err){
-			console.log('出错了')
+			res.send({'code':1,data:{},msg:"数据库链接失败"});
 		}else{
 			if(data.length===0){
 				res.send({'code':'1','data':{},'msg':"该用户名未注册"});

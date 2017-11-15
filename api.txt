@@ -122,7 +122,7 @@ get_banner_list
           	}
 4.获取文章分类V
 get_artile_class
-  url:127.0.0.1:3000/get_artile_class
+  url:127.0.0.1:3000/article/get_artile_class
   data:{
       user_id:""
   }
@@ -162,7 +162,7 @@ get_artile_class_detail
           ]
 6.新增文章分类V
 add_article_class
-  url:127.0.0.1:3000/add_artile_class
+  url:127.0.0.1:3000/article/add_artile_class
   data:{
         user_id:"",
   		article_class_name:"",

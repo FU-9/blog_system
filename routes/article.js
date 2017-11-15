@@ -12,7 +12,7 @@ router.get("/add_article_class",(req,res)=>{
 	}else{
 		linkDB.query("SELECT * FROM `article_table` WHERE user_id="+ReceivedData['user_id']+";",(err,data)=>{
 			if(err){
-				console.log('出错了')
+				res.send({'code':1,data:{},msg:"数据库链接失败"});
 			}else{
 				let articleArr = eval("("+data[0]['article']+')');
 				articleArr.push({
@@ -24,7 +24,7 @@ router.get("/add_article_class",(req,res)=>{
 				articleArr = JSON.stringify(articleArr)
 				linkDB.query("UPDATE `article_table` SET article=' "+articleArr+" '  WHERE user_id="+ReceivedData['user_id']+";",(err,uploadData)=>{
 					if(err){
-						console.log("出错了")
+						res.send({'code':1,data:{},msg:"数据库链接失败"});
 					}else{
 						res.send({'code':0,data:{},msg:"成功"})
 					}
@@ -34,11 +34,11 @@ router.get("/add_article_class",(req,res)=>{
 	}
 })
 /*----------------------------获取分类列表----------------------------------*/
-router.get("/get_artile_class",(req,res)=>{
+router.get("/get_article_class",(req,res)=>{
 	let ReceivedData = req.query;
 	linkDB.query("SELECT * FROM `article_table` WHERE user_id="+ ReceivedData['user_id'] +";",(err,data)=>{
 		if(err){
-			console.log("出错了")
+			res.send({'code':1,data:{},msg:"数据库链接失败"});
 		}else{
 			let articleArr = eval("("+data[0]['article']+')');
 			if(articleArr.length===0){
