@@ -12,7 +12,7 @@ router.get("/add_article_class",(req,res)=>{
 	}else{
 		linkDB.query("SELECT * FROM `article_table` WHERE user_id="+ReceivedData['user_id']+";",(err,data)=>{
 			if(err){
-				res.send({'code':1,data:{},msg:"数据库链接失败"});
+				console.log('出错了')
 			}else{
 				let articleArr = eval("("+data[0]['article']+')');
 				articleArr.push({
@@ -24,7 +24,7 @@ router.get("/add_article_class",(req,res)=>{
 				articleArr = JSON.stringify(articleArr)
 				linkDB.query("UPDATE `article_table` SET article=' "+articleArr+" '  WHERE user_id="+ReceivedData['user_id']+";",(err,uploadData)=>{
 					if(err){
-						res.send({'code':1,data:{},msg:"数据库链接失败"});
+						console.log("出错了")
 					}else{
 						res.send({'code':0,data:{},msg:"成功"})
 					}
@@ -38,7 +38,7 @@ router.get("/get_article_class",(req,res)=>{
 	let ReceivedData = req.query;
 	linkDB.query("SELECT * FROM `article_table` WHERE user_id="+ ReceivedData['user_id'] +";",(err,data)=>{
 		if(err){
-			res.send({'code':1,data:{},msg:"数据库链接失败"});
+			console.log("出错了")
 		}else{
 			let articleArr = eval("("+data[0]['article']+')');
 			if(articleArr.length===0){
@@ -57,5 +57,41 @@ router.get("/get_article_class",(req,res)=>{
 		}
 	})
 })
+
+/*----------------------------删除分类列表----------------------------------*/
+/*ps:article_class_id匹配不到未作处理*/
+{
+	let articleArr,ReceivedData;
+	router.get("/delete_article_class",(req,res,next)=>{
+		ReceivedData = {
+			user_id : 63,
+			article_class_id:1
+		}
+		linkDB.query("SELECT * FROM `article_table` WHERE user_id="+ ReceivedData['user_id'] +";", (err,data)=>{
+			if(err){
+				res.send({code:1,data:{},msg:"数据库链接失败"})
+			}else{
+				articleArr = eval("("+data[0]['article']+')');
+				articleArr.forEach((item,index)=>{
+					if(item['article_class_id']==ReceivedData['article_class_id']){
+						articleArr.splice(index,1);
+						next();
+					}
+				});
+			}
+		})
+	});
+	router.get("/delete_article_class",(req,res)=>{
+		articleArr = JSON.stringify(articleArr)
+		linkDB.query("UPDATE `article_table` SET article=' "+articleArr+" '  WHERE user_id="+ReceivedData['user_id']+";",(err,updata)=>{
+			if(err){
+				res.send({code:1,data:{},msg:"数据库链接失败"})
+			}else{
+				res.send({code:0,data:{},msg:"成功"});
+			}
+		})
+	})
+}
+
 
 module.exports = router;

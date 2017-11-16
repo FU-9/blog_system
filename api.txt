@@ -183,3 +183,32 @@ add_article
   	article_class_id:"",
   	content:""
   }
+  callback:
+      data:
+        code:0成功 1失败
+        data:{
+        
+        }
+		msg:""
+8.删除文章分类V
+delete_article_class
+  url:127.0.0.1:3000/article/delete_article_class
+  data:{
+       user_id:"",
+       article_class_id:""
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          data:{
+          
+          }
+          msg:""
+  
+  
+  
+  
+  
+  
+  
+  
