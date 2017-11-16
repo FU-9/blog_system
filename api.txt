@@ -99,11 +99,12 @@ get_banner_list
           		fabulous:""
           	}
           ]
- 3.获取文章详情
+ 3.获取文章详情V
  get_article_detail
   url:127.0.0.1:3000/get_article_detail
   data:{
-      id:"",
+  	  user_id:
+      article_id:"",
       article_class_id:""
   }
   callback:
@@ -137,7 +138,7 @@ get_artile_class
             	    article_class_id:""
             }
         ]
-5.获取单条分类所有文章列表
+5.获取单条分类所有文章列表V
 get_artile_class_detail
   url:127.0.0.1:3000/get_artile_class_detail
   data:{
@@ -175,12 +176,13 @@ add_article_class
           data:{
           
           }
-7.新增文章
+7.新增文章V
 add_article
   url:127.0.0.1:3000/add_article
   data:{
     user_id:"",
   	article_class_id:"",
+  	title:"",
   	content:""
   }
   callback:
