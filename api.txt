@@ -206,10 +206,28 @@ delete_article_class
           
           }
           msg:""
-  
-  
-  
-  
+ 9.删除文章
+  delete_article
+    url:127.0.0.1:3000/article/delete_article
+    data:{
+  	  user_id:
+      article_id:"",
+      article_class_id:""
+  }
+  callback:
+      data:
+          code:0成功 1失败
+          msg:
+          data:{
+          		time:"",
+          		id:"",
+          		article_class_id:"",
+          		title:"",
+          		author:"",
+          		content:"",
+          		look:"",
+          		fabulous:""
+          	}
   
   
   

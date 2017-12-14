@@ -4,6 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var JFUM = require('jfum');
+var jfum = new JFUM({
+  minFileSize: 204800,                      // 200 kB
+  maxFileSize: 5242880,                     // 5 mB
+  acceptFileTypes: /\.(gif|jpe?g|png)$/i    // gif, jpg, jpeg, png
+});
 //route
 var login = require('./routes/login');
 var article = require('./routes/article');
@@ -12,8 +18,7 @@ var app = express();
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     next();
 });
 // view engine setup
@@ -31,13 +36,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', login);
 app.use('/article', article);
 
+app.options('/upload', jfum.optionsHandler.bind(jfum));
+app.use('/upload', jfum.postHandler.bind(jfum), function(req, res) {
+  console.log( req.jfum);
+  res.send('fdsfas')
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
